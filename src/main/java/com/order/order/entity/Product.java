@@ -1,0 +1,40 @@
+package com.order.order.entity;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class Product {
+
+    //主键
+    private int id;
+
+    //商品名称
+    private String name;
+
+    //商品库存
+    private int number;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+}
