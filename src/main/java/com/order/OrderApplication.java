@@ -1,8 +1,7 @@
-package com.order.order.controller;
+package com.order;
 
-import com.order.order.entity.Product;
-import com.order.order.service.OrderService;
-import com.order.order.service.impl.OrderServiceImpl;
+import com.order.entity.Product;
+import com.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,8 +32,9 @@ public class OrderApplication {
     }
 
     @RequestMapping("/setProduct")
-    public String setProduct(@RequestParam(value = "product") String product) {
+    public String setProduct(@RequestParam(value = "productJson") String productJson) {
+        String returnMsg = orderService.setProduct(productJson);
 
-        return "set successfull";
+        return returnMsg;
     }
 }

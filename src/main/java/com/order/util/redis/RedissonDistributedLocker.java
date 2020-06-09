@@ -1,4 +1,4 @@
-package com.order.order.util.redis;
+package com.order.util.redis;
 
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;

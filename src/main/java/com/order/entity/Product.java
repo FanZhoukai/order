@@ -1,17 +1,28 @@
-package com.order.order.entity;
+package com.order.entity;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Map;
+
+@Entity
+@Table(name="product")
 public class Product {
 
     //主键
+    @Id
+    @Column(name = "id")
     private int id;
 
     //商品名称
+    @Column(name = "name")
     private String name;
 
     //商品库存
+    @Column(name = "number")
     private int number;
 
     public int getId() {
@@ -37,4 +48,5 @@ public class Product {
     public void setNumber(int number) {
         this.number = number;
     }
+
 }
