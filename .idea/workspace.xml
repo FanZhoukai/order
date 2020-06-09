@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c66d55c-c6c1-479c-b1df-57b2bd5e5aa5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapping/ProductMapping.xml.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/order.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/order.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/controller/OrderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/OrderApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/dao/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/dao/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/util/redis/RedisDistributedLocker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/util/redis/RedisDistributedLocker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/order/util/redis/RedissonDistributedLocker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/util/redis/RedissonDistributedLocker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/ProductMapping.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/service/impl/OrderServiceImpl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +75,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591609457048</updated>
-      <workItem from="1591609458429" duration="12995000" />
+      <workItem from="1591609458429" duration="14275000" />
     </task>
     <servers />
   </component>

@@ -18,10 +18,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Product getProduct(String id) {
-        System.out.println("productDao:" + productDao);
         Optional<Product> opt =productDao.findById(Integer.parseInt(id));
-
-        return Optional.ofNullable(opt).map(product -> product.getName()).get();
+        return opt.orElseGet(() -> new Product());
     }
 
     @Override
