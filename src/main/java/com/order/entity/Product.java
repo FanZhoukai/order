@@ -2,10 +2,7 @@ package com.order.entity;
 
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Map;
 
 @Entity
@@ -14,7 +11,8 @@ public class Product {
 
     //主键
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     //商品名称

@@ -33,8 +33,7 @@ public class OrderApplication {
 
     @RequestMapping("/setProduct")
     public String setProduct(@RequestParam(value = "productJson") String productJson) {
-        String returnMsg = orderService.setProduct(productJson);
-
-        return returnMsg;
+        String id = orderService.setProduct(productJson);
+        return id;
     }
 }

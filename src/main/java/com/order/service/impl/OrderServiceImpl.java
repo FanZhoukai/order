@@ -24,14 +24,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String setProduct(String productInfo) {
-        String returnMsg = "success ";
         JSONObject jsonObject = JSONObject.parseObject(productInfo);
         Map<String, Object> jsonDataMap = (Map<String, Object>) JSONObject.parseObject(jsonObject.toJSONString());
         Product product = new Product();
         product.setName((String) jsonDataMap.get("name"));
         product.setNumber(Integer.parseInt((String) jsonDataMap.get("number")));
         product = productDao.save(product);
-        return returnMsg;
+        System.out.println(product.getId());
+        return String.valueOf(product.getId());
     }
 
     @Override
