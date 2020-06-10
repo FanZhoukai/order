@@ -3,7 +3,7 @@ package com.order.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="order")
+@Table(name="tbl_order")
 public class Order {
 
     //主键,也作为订单号使用
