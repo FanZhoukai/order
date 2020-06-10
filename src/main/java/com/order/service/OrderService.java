@@ -11,6 +11,6 @@ public interface OrderService {
 
     public String setProduct(String productJson);
 
-    public boolean doPurchase(String productId);
+    public String doPurchase(String purchaseJson);
 
 }

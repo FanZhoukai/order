@@ -36,4 +36,10 @@ public class OrderApplication {
         String id = orderService.setProduct(productJson);
         return id;
     }
+
+    @RequestMapping("/doPurchase")
+    public String doPurchase(@RequestParam(value = "purchaseJson") String purchaseJson) {
+        String msg = orderService.doPurchase(purchaseJson);
+        return msg;
+    }
 }
