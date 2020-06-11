@@ -1,6 +1,6 @@
 package com.order;
 
-import com.order.entity.Product;
+import com.order.entity.TblProduct;
 import com.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -27,8 +27,8 @@ public class OrderApplication {
 
     @RequestMapping("/getProduct")
     public String getProduct(@RequestParam(value = "id") String id) {
-        Product product = orderService.getProduct(id);
-        return product.getName();
+        TblProduct product = orderService.getProduct(id);
+        return String.valueOf(product.getProductprice());
     }
 
     @RequestMapping("/setProduct")
