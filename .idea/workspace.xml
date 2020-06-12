@@ -4,10 +4,6 @@
     <list default="true" id="3c66d55c-c6c1-479c-b1df-57b2bd5e5aa5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/order/OrderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/OrderApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/entity/TblOrderConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/entity/TblOrderConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/entity/TblProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/entity/TblProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/order/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/order/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +101,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591609457048</updated>
-      <workItem from="1591609458429" duration="44549000" />
+      <workItem from="1591609458429" duration="47482000" />
+      <workItem from="1591946143071" duration="1165000" />
     </task>
     <servers />
   </component>
@@ -117,7 +114,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

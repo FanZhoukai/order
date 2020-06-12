@@ -40,7 +40,6 @@ public class OrderApplication {
 
     @RequestMapping("/doPurchase")
     public String doPurchase(@RequestParam(value = "purchaseJson") String purchaseJson) {
-        System.out.println(purchaseJson);
         String msg = orderService.doPurchase(purchaseJson);
         return msg;
     }
