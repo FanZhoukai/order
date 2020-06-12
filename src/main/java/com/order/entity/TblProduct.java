@@ -9,6 +9,8 @@ import java.util.Map;
 @Table(name="tbl_product")
 public class TblProduct {
 
+    public TblProduct() { }
+
     public TblProduct(Map<String, Object> jsonDataMap) {
         /*
          * {"productnum":"","productprice":"","merchantid":""}

@@ -13,7 +13,7 @@ public class TblOrderConsumer {
         /*
          * {"sumproductjson":[{"productid":"","productprice":"","productnum":"","merchantid":""}],"sumprise":"","consumerid":""}
          * */
-        setSumproductjson((JSONArray) jsonDataMap.get("sumproductjson"));
+        setSumproductjson(((JSONArray) jsonDataMap.get("sumproductjson")).toJSONString());
         setSumprise(Long.parseLong((String) jsonDataMap.get("sumprise")));
         setConsumerid(Integer.parseInt((String) jsonDataMap.get("consumerid")));
     }
@@ -26,7 +26,9 @@ public class TblOrderConsumer {
 
     //商品列表，含商品id+商品单价+商品数目+商品所属商户id
     @Column(name = "sumproductjson")
-    private JSONArray sumproductjson;
+    private String sumproductjson;
+
+
 
     //订单总金额
     @Column(name = "sumprise")
@@ -44,11 +46,10 @@ public class TblOrderConsumer {
         this.consumerorderid = consumerorderid;
     }
 
-    public JSONArray getSumproductjson() {
-        return sumproductjson;
-    }
+    public String getSumproductjson() { return sumproductjson; }
+    public JSONArray getSumproductjsonArray() { return JSONArray.parseArray(sumproductjson); }
 
-    public void setSumproductjson(JSONArray sumproductjson) {
+    public void setSumproductjson(String sumproductjson) {
         this.sumproductjson = sumproductjson;
     }
 

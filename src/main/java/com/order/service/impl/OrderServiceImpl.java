@@ -21,7 +21,7 @@ import java.util.*;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private TblProductDao productDao;
+    private TblProductDao tblproductDao;
     @Autowired
     private TblOrderConsumerDao tblOrderConsumerDao;
     @Autowired
@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public TblProduct getProduct(String id) {
-        Optional<TblProduct> opt =productDao.findById(Integer.parseInt(id));
+        Optional<TblProduct> opt =tblproductDao.findById(Integer.parseInt(id));
         return opt.orElseGet(() -> new TblProduct());
     }
 
@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
         * */
         Map<String, Object> productInfoMap = CommonUtil.parseJson(productInfo);
         TblProduct product = new TblProduct(productInfoMap);
-        product = productDao.save(product);
+        product = tblproductDao.save(product);
         return String.valueOf(product.getProductid());
     }
 
@@ -56,25 +56,38 @@ public class OrderServiceImpl implements OrderService {
          * */
         Map<String, Object> purchaseJsonMap = CommonUtil.parseJson(purchaseJson);
 
-        //检查库存是否存在
-        for (String productid: productids) {
-            TblProduct product = getProduct(productid);
-            if (product.getNumber() == 0) {
-                return "下单失败，无库存，productid=" + productid;
-            }
-        }
         //检查金额是否足够。默认这样一个逻辑：如果金额大于零说明已付款，此时不会出现改价操作。如果金额=0，则可以改价。
-        Optional<TblConsumer> consumer = tblConsumerDao.findById(Integer.parseInt((String) purchaseJsonMap.get("consumerid")));
-        long consumermoney = consumer.orElseGet(() -> new TblConsumer()).getConsumermoney();
+        Optional<TblConsumer> consumerOptional = tblConsumerDao.findById(Integer.parseInt((String) purchaseJsonMap.get("consumerid")));
+        TblConsumer tblConsumer = consumerOptional.orElseGet(() -> new TblConsumer());
+        long consumermoney = tblConsumer.getConsumermoney();
         long ordersummoney = Long.parseLong((String) purchaseJsonMap.get("sumprise"));
         if (ordersummoney > consumermoney) {
             return "金额不足，不可创建订单";
         }
+
         //检查库存是否足够
-        //TODO
+        JSONArray sumproductjsonArray = (JSONArray) purchaseJsonMap.get("sumproductjson");
+        Map<TblProduct, Integer> decrProNumMap = new HashMap<TblProduct, Integer>();
+        for(int i=0;i<sumproductjsonArray.size();i++) {
+            Optional<TblProduct> tblProductOptional = tblproductDao.findById(Integer.parseInt((String) sumproductjsonArray.getJSONObject(i).get("productid")));
+            TblProduct tblProduct = tblProductOptional.orElseGet(() -> new TblProduct());
+            int orderNeedNum = Integer.parseInt((String) sumproductjsonArray.getJSONObject(i).get("productnum"));
+            if (tblProduct.getProductnum() >= orderNeedNum) {
+                decrProNumMap.put(tblProduct, orderNeedNum);
+            }else {
+                return "库存不够，订单创建失败";
+            }
+        }
+
+        //扣钱
+        tblConsumer.setConsumermoney(tblConsumer.getConsumermoney() - ordersummoney);
+        tblConsumerDao.save(tblConsumer);
 
         //减库存
-        //TODO
+        for (TblProduct tblProduct: decrProNumMap.keySet()) {
+            tblProduct.setProductnum(tblProduct.getProductnum() - decrProNumMap.get(tblProduct));
+            tblproductDao.save(tblProduct);
+        }
 
         //生成用户视角的总订单
         TblOrderConsumer tblOrderConsumer = new TblOrderConsumer(purchaseJsonMap);
@@ -83,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
         //生成商家视角的订单
         Set<String> merchantidSet = new HashSet<String>();
         Map<String, TblOrderMerchant> tblOrderMerchantMap = new HashMap<String, TblOrderMerchant>();
-        JSONArray sumproductjsonArray = tblOrderConsumer.getSumproductjson();
+        sumproductjsonArray = tblOrderConsumer.getSumproductjsonArray();
         for(int i=0;i<sumproductjsonArray.size();i++) {
             String merchantid = (String) sumproductjsonArray.getJSONObject(i).get("merchantid");
             if ( !merchantidSet.contains(merchantid) ) {

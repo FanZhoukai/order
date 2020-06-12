@@ -17,6 +17,7 @@ public class OrderApplication {
     private OrderService orderService;
 
     public static void main(String[] args) {
+        System.setProperty("tomcat.util.http.parser.HttpParser.requestTargetAllow","|{}");
         SpringApplication.run(OrderApplication.class, args);
     }
 
@@ -39,6 +40,7 @@ public class OrderApplication {
 
     @RequestMapping("/doPurchase")
     public String doPurchase(@RequestParam(value = "purchaseJson") String purchaseJson) {
+        System.out.println(purchaseJson);
         String msg = orderService.doPurchase(purchaseJson);
         return msg;
     }
