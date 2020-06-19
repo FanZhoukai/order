@@ -29,3 +29,5 @@
 **/.DS_Store
 **/native
 **/notifications
+# 忽略log日志
+##/log
