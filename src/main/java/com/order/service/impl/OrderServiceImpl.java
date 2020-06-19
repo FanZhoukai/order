@@ -11,6 +11,8 @@ import com.order.entity.TblOrderMerchant;
 import com.order.entity.TblProduct;
 import com.order.service.OrderService;
 import com.order.util.common.CommonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private TblConsumerDao tblConsumerDao;
 
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Override
     public TblProduct getProduct(String id) {
         Optional<TblProduct> opt =tblproductDao.findById(Integer.parseInt(id));
@@ -43,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
         Map<String, Object> productInfoMap = CommonUtil.parseJson(productInfo);
         TblProduct product = new TblProduct(productInfoMap);
         product = tblproductDao.save(product);
+        logger.debug("保存商品：" + productInfo);
         return String.valueOf(product.getProductid());
     }
 
@@ -62,6 +67,7 @@ public class OrderServiceImpl implements OrderService {
         long consumermoney = tblConsumer.getConsumermoney();
         long ordersummoney = Long.parseLong((String) purchaseJsonMap.get("sumprise"));
         if (ordersummoney > consumermoney) {
+            logger.debug("金额不足，不可创建订单");
             return "金额不足，不可创建订单";
         }
 
@@ -75,6 +81,7 @@ public class OrderServiceImpl implements OrderService {
             if (tblProduct.getProductnum() >= orderNeedNum) {
                 decrProNumMap.put(tblProduct, orderNeedNum);
             }else {
+                logger.debug("库存不够，订单创建失败");
                 return "库存不够，订单创建失败";
             }
         }
@@ -82,16 +89,19 @@ public class OrderServiceImpl implements OrderService {
         //扣钱
         tblConsumer.setConsumermoney(tblConsumer.getConsumermoney() - ordersummoney);
         tblConsumerDao.save(tblConsumer);
+        logger.debug("已扣钱");
 
         //减库存
         for (TblProduct tblProduct: decrProNumMap.keySet()) {
             tblProduct.setProductnum(tblProduct.getProductnum() - decrProNumMap.get(tblProduct));
             tblproductDao.save(tblProduct);
+            logger.debug("减库存");
         }
 
         //生成用户视角的总订单
         TblOrderConsumer tblOrderConsumer = new TblOrderConsumer(purchaseJsonMap);
         tblOrderConsumer = tblOrderConsumerDao.save(tblOrderConsumer);
+        logger.debug("生成用户视角的总订单");
 
         //生成商家视角的订单
         Set<String> merchantidSet = new HashSet<String>();
@@ -114,8 +124,8 @@ public class OrderServiceImpl implements OrderService {
         }
         for (String merchantid: tblOrderMerchantMap.keySet()) {
             tblOrderMerchantDao.save(tblOrderMerchantMap.get(merchantid));
+            logger.debug("生成商家视角的订单");
         }
-
         return "成功";
     }
 
